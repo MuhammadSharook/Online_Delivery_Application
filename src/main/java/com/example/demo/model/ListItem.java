@@ -41,4 +41,8 @@ public class ListItem {
     @JoinColumn
     Admin admin;
 
+    @ManyToOne
+    @JoinColumn
+    Cart cart;
+
 }
