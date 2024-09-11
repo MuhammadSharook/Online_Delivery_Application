@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 
+import com.example.demo.Enum.Role;
 import com.example.demo.Enum.VendorCategory;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,6 +38,9 @@ public class Vendor {
     @Column(unique = true,nullable = false)
     @Size(min = 10,max = 10)
     String ContactNumber;
+
+    @Enumerated(EnumType.STRING)
+    Role role;
 
     @OneToMany(mappedBy = "vendor",cascade = CascadeType.ALL)
     List<OrderEntity> orders = new ArrayList<>();

@@ -1,9 +1,13 @@
 package com.example.demo.model;
 
 import com.example.demo.Enum.Gender;
+import com.example.demo.Enum.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.springframework.boot.admin.SpringApplicationAdminMXBean;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+import org.springframework.boot.autoconfigure.pulsar.PulsarProperties;
 
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -16,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "admin")
-public class Admin {
+public class Admin  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +37,8 @@ public class Admin {
     @Enumerated(EnumType.STRING)
     Gender gender;
 
+    @Enumerated(EnumType.STRING)
+    Role role;
 
     @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
     List<Customer> user = new ArrayList<>();

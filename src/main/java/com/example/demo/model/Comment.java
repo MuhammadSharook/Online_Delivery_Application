@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -13,29 +15,27 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product_item")
-public class ProductItem {
+@Table(name = "comment")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    int requiredQuantity;
+    String content;
 
-    double totalCost;
+    @Size(min = 1,max = 5)
+    int rating;
 
-    @ManyToOne
-    @JoinColumn
-    ListItem listItem;
-
-    @ManyToOne
-    @JoinColumn
-    OrderEntity order;
+    Date date;
 
     @ManyToOne
-    @JoinColumn
-    Admin admin;
+    @JoinColumn(name = "customer",nullable = false)
+    Customer customer;
 
-    @OneToMany(mappedBy = "productItem",cascade = CascadeType.ALL,orphanRemoval = true)
-    List<Comment> commentList = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "productItem",nullable = false)
+    ProductItem productItem;
+
+
 }

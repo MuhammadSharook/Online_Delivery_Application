@@ -1,13 +1,16 @@
 package com.example.demo.model;
 
 import com.example.demo.Enum.Gender;
+import com.example.demo.Enum.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -33,6 +36,13 @@ public class Customer {
 
     String address;
 
+    String password;
+
+
+    @Enumerated(EnumType.STRING)
+    Role role;
+
+
     @Column(unique = true)
     @Size(min = 10, max = 10)
     String mobileNo;
@@ -47,6 +57,38 @@ public class Customer {
     List<OrderEntity> orders = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn
     Admin admin;
+
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    List<Comment> commentList = new ArrayList<>();
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return List.of(new SimpleGrantedAuthority("Role_"+role.name()));
+//    }
+//
+//    @Override
+//    public String getUsername() {
+//        return email;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isAccountNonLocked() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isCredentialsNonExpired() {
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean isEnabled() {
+//        return true;
+//    }
 }

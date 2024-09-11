@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 
 import com.example.demo.Enum.Gender;
+import com.example.demo.Enum.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -33,6 +34,9 @@ public class DeliveryPartner {
 
     @Enumerated(EnumType.STRING)
     Gender gender;
+
+    @Enumerated(EnumType.STRING)
+    Role role;
 
     @OneToMany(mappedBy = "deliveryPartner",cascade = CascadeType.ALL)
     List<OrderEntity> orders = new ArrayList<>();
