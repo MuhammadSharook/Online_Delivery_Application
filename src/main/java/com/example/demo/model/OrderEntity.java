@@ -31,6 +31,7 @@ public class OrderEntity {
     OrderStatus orderStatus;
 
     @CreationTimestamp
+
     Date orderTime;
 
     @ManyToOne

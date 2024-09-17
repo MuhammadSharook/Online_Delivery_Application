@@ -22,7 +22,11 @@ public class ProductItem {
 
     int requiredQuantity;
 
-    double totalCost;
+    double price;
+
+    String productName;
+
+    String discription;
 
     @ManyToOne
     @JoinColumn
@@ -35,6 +39,14 @@ public class ProductItem {
     @ManyToOne
     @JoinColumn
     Admin admin;
+
+    @ManyToOne
+    @JoinColumn
+    Cart cart;
+
+    @ManyToOne
+    @JoinColumn
+    Vendor vendor;
 
     @OneToMany(mappedBy = "productItem",cascade = CascadeType.ALL,orphanRemoval = true)
     List<Comment> commentList = new ArrayList<>();

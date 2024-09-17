@@ -2,7 +2,8 @@ package com.example.demo.model;
 
 
 import com.example.demo.Enum.Role;
-import com.example.demo.Enum.VendorCategory;
+import com.example.demo.Enum.SubCategory;
+import com.example.demo.Enum.Category;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -32,8 +33,10 @@ public class Vendor {
     String location;
 
     @Enumerated(EnumType.STRING)
-    VendorCategory vendorCategory;
+    Category category;
 
+    @Enumerated(EnumType.STRING)
+    SubCategory subCategory;
 
     @Column(unique = true,nullable = false)
     @Size(min = 10,max = 10)
@@ -46,6 +49,6 @@ public class Vendor {
     List<OrderEntity> orders = new ArrayList<>();
 
     @OneToMany(mappedBy = "vendor",cascade = CascadeType.ALL)
-    List<ListItem> availableListItems = new ArrayList<>();
+    List<ProductItem> productItemList = new ArrayList<>();
 
 }

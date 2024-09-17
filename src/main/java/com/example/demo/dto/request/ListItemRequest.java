@@ -1,7 +1,7 @@
 package com.example.demo.dto.request;
 
 import com.example.demo.Enum.SubCategory;
-import com.example.demo.Enum.VendorCategory;
+import com.example.demo.Enum.Category;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,7 +18,7 @@ public class ListItemRequest {
 
     double price;
 
-    VendorCategory vendorCategory;
+    Category category;
 
     SubCategory subCategory;
 

@@ -10,9 +10,11 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartResponse {
+public class VendorResponse {
 
-    double cartTotal;
+    String name;
 
-    List<ProductItemResponse> productItems;
+    String location;
+
+    List<ProductItemResponse> productItemResponseList;
 }

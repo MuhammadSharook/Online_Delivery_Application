@@ -1,22 +1,21 @@
-package com.example.demo.dto.request;
+package com.example.demo.dto.response;
 
-import com.example.demo.Enum.Gender;
-import com.example.demo.Enum.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeliveryPartnerRequest {
+public class DeliveryPartnerResponse {
 
     String name;
 
     String mobileNo;
 
-    Gender gender;
-
-    Role role;
+    List<OrderEntityResponse> orders = new ArrayList<>();
 }

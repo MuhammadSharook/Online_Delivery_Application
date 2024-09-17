@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import com.example.demo.Enum.VendorCategory;
+import com.example.demo.Enum.Category;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -26,7 +26,7 @@ public class ListItem {
     double price;
 
     @Enumerated(EnumType.STRING)
-    VendorCategory category;
+    Category category;
 
     boolean available;
 
@@ -41,8 +41,5 @@ public class ListItem {
     @JoinColumn
     Admin admin;
 
-    @ManyToOne
-    @JoinColumn
-    Cart cart;
 
 }

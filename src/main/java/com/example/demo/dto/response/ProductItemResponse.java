@@ -1,7 +1,5 @@
 package com.example.demo.dto.response;
 
-import com.example.demo.Enum.SubCategory;
-import com.example.demo.Enum.Category;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,14 +8,16 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListItemResponse {
+public class ProductItemResponse {
 
-    String productName;
+    int requiredQuantity;
 
     double price;
 
-    SubCategory subCategory;
+    String productName;
 
-    Category category;
+    String discription;
+
+
 
 }

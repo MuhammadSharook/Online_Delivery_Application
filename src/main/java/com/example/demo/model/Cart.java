@@ -27,5 +27,5 @@ public class Cart {
     Customer customer;
 
     @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
-    List<ListItem> listitems = new ArrayList<>();
+    List<ProductItem> productItems = new ArrayList<>();
 }

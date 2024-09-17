@@ -1,6 +1,6 @@
 package com.example.demo.Enum;
 
-public enum VendorCategory {
+public enum Category {
 
     Electronics,
     Clothing,
