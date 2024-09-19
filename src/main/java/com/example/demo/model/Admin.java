@@ -9,6 +9,8 @@ import org.springframework.boot.admin.SpringApplicationAdminMXBean;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.boot.autoconfigure.pulsar.PulsarProperties;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,15 @@ public class Admin  {
     @Column(unique = true,nullable = false)
     @Size(min = 10,max = 10)
     String mobileNo;
+
+    @Email
+    @NotNull
+    @Column(unique = true)
+    String mail;
+
+    String address;
+
+    String password;
 
     @Enumerated(EnumType.STRING)
     Gender gender;

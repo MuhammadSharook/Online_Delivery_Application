@@ -38,7 +38,6 @@ public class ListItem {
     List<ProductItem> productItems = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn
     Admin admin;
 
 

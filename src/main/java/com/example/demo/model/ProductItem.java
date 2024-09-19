@@ -37,7 +37,6 @@ public class ProductItem {
     OrderEntity order;
 
     @ManyToOne
-    @JoinColumn
     Admin admin;
 
     @ManyToOne

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DeliveryPartnerTransformer {
 
-    public DeliveryPartner fromDeliveryPartnerRequesttoDeliveryPArtner(DeliveryPartnerRequest deliveryPartnerRequest){
+    public static DeliveryPartner fromDeliveryPartnerRequesttoDeliveryPartner(DeliveryPartnerRequest deliveryPartnerRequest){
         return DeliveryPartner.builder()
                 .name(deliveryPartnerRequest.getName())
                 .mobileNO(deliveryPartnerRequest.getMobileNo())
@@ -22,7 +22,7 @@ public class DeliveryPartnerTransformer {
                 .build();
     }
 
-    public DeliveryPartnerResponse fromDeliverPartnerToDeliveryPartnerResponse(DeliveryPartner deliveryPartner){
+    public static DeliveryPartnerResponse fromDeliverPartnerToDeliveryPartnerResponse(DeliveryPartner deliveryPartner){
 
         List<OrderEntityResponse> orderEntityResponse = new ArrayList<>();
 

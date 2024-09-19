@@ -42,6 +42,5 @@ public class DeliveryPartner {
     List<OrderEntity> orders = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn
     Admin admin;
 }

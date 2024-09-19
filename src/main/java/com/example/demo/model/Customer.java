@@ -42,6 +42,7 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     Role role;
 
+    int noOfOrders = 0;
 
     @Column(unique = true)
     @Size(min = 10, max = 10)
