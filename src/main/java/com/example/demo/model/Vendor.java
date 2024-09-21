@@ -49,6 +49,6 @@ public class Vendor {
     List<OrderEntity> orders = new ArrayList<>();
 
     @OneToMany(mappedBy = "vendor",cascade = CascadeType.ALL)
-    List<ProductItem> productItemList = new ArrayList<>();
+    List<ListItem> availableListItems = new ArrayList<>();
 
 }

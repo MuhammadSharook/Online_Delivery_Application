@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.example.demo.Enum.Category;
+import com.example.demo.Enum.SubCategory;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -27,6 +28,9 @@ public class ListItem {
 
     @Enumerated(EnumType.STRING)
     Category category;
+
+    @Enumerated(EnumType.STRING)
+    SubCategory subCategory;
 
     boolean available;
 

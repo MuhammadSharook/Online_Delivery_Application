@@ -43,9 +43,6 @@ public class ProductItem {
     @JoinColumn
     Cart cart;
 
-    @ManyToOne
-    @JoinColumn
-    Vendor vendor;
 
     @OneToMany(mappedBy = "productItem",cascade = CascadeType.ALL,orphanRemoval = true)
     List<Comment> commentList = new ArrayList<>();

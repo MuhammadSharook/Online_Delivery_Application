@@ -36,4 +36,6 @@ public class ProductItemController {
         productItemService.addCommentToProduct(productId,comment);
         return new ResponseEntity("Comment is added.",HttpStatus.CREATED);
     }
+
+
 }

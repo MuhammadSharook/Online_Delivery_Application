@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.request.ListItemRequest;
 import com.example.demo.dto.request.VendorRequest;
 import com.example.demo.dto.response.VendorResponse;
 import com.example.demo.service.VendorService;
@@ -27,6 +28,7 @@ public class VendorController {
         return new ResponseEntity(vendorResponse, HttpStatus.CREATED);
     }
 
+    @GetMapping("/find/mobile{mobile}")
     public ResponseEntity getVendorByMobile(@PathVariable("mobile") String mobileNo){
         try{
             VendorResponse vendorResponse = vendorService.getVendorByMobile(mobileNo);
@@ -36,5 +38,11 @@ public class VendorController {
         {
             return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping("/add/list")
+    public ResponseEntity addListItemToVendor(@RequestBody ListItemRequest listItemRequest){
+        VendorResponse vendorResponse = vendorService.addListItemToVendor(listItemRequest);
+        return new ResponseEntity(vendorResponse,HttpStatus.CREATED);
     }
 }
