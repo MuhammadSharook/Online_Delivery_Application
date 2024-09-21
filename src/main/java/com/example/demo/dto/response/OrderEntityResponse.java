@@ -1,5 +1,6 @@
 package com.example.demo.dto.response;
 
+import com.example.demo.Enum.OrderStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -18,6 +19,8 @@ public class OrderEntityResponse {
     double orderTotoal;
 
     Date orderTime;
+
+    OrderStatus status;
 
     String customerName;
 

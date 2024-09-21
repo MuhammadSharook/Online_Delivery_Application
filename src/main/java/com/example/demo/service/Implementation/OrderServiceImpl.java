@@ -1,9 +1,11 @@
 package com.example.demo.service.Implementation;
 
 import com.example.demo.Enum.Coupon;
+import com.example.demo.Enum.OrderStatus;
 import com.example.demo.dto.response.OrderEntityResponse;
 import com.example.demo.exception.CustomerNotFoundException;
 import com.example.demo.exception.EmptyCartException;
+import com.example.demo.exception.OrderNotfoundException;
 import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import com.example.demo.service.OrderService;
@@ -11,6 +13,7 @@ import com.example.demo.transformer.OrderEntityTransformer;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -59,13 +62,14 @@ public class OrderServiceImpl implements OrderService {
 
         OrderEntity order = OrderEntityTransformer.prepareOrderEntity(cart);
 
-        OrderEntity savedOrder = orderEntityRepository.save(order);
 
         order.setCustomer(customer);
         order.setDeliveryPartner(deliveryPartner);
         order.setVendor(vendor);
         order.setProductItems(cart.getProductItems());
+        order.setOrderStatus(OrderStatus.ORDER_PLACED);
 
+        OrderEntity savedOrder = orderEntityRepository.save(order);
 
         customer.getOrders().add(savedOrder);
         deliveryPartner.getOrders().add(savedOrder);
@@ -126,6 +130,38 @@ public class OrderServiceImpl implements OrderService {
 
         return OrderEntityTransformer.fromOrderEntityToOrderEntityResponse(savedOrder);
 
+    }
+
+    @Override
+    public List<OrderEntity> getOrderHistory(int customerId) {
+        Customer customer = customerRepository.findById(customerId).get();
+        if(customer == null)
+        {
+            throw new CustomerNotFoundException("Invalid Customer Id!!!");
+        }
+
+        List<OrderEntity> orderEntityList = orderEntityRepository.findByCustomerId(customerId);
+        if(orderEntityList.isEmpty())
+        {
+            throw new OrderNotfoundException("You have Zero orders!!!");
+        }
+
+        return orderEntityList;
+    }
+
+    @Override
+    public OrderEntityResponse updateOrderStatus(int orderId, OrderStatus status) {
+        OrderEntity order = orderEntityRepository.findById(orderId).get();
+        if(order == null)
+        {
+            throw new OrderNotfoundException("Invalid Order Id!!!");
+        }
+
+        order.setOrderStatus(status);
+
+        OrderEntity savedOrder = orderEntityRepository.save(order);
+
+        return OrderEntityTransformer.fromOrderEntityToOrderEntityResponse(savedOrder);
     }
 
     private void clearCart(Cart cart){

@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.Enum.Category;
+import com.example.demo.dto.request.ListItemRequest;
+import com.example.demo.dto.request.ProductRequest;
+import com.example.demo.dto.response.ProductItemResponse;
 import com.example.demo.dto.response.ProductItemResponsewithVendorName;
 import com.example.demo.model.Comment;
 import com.example.demo.service.ProductItemService;
@@ -38,4 +41,32 @@ public class ProductItemController {
     }
 
 
+    @PostMapping("/add")
+    public ResponseEntity addProductItem(@RequestBody ListItemRequest listItemRequest){
+        try {
+            ProductItemResponse response = productItemService.addProductItem(listItemRequest);
+            return new ResponseEntity(response,HttpStatus.ACCEPTED);
+        }catch (Exception e)
+        {
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/delete/{productId}")
+    public ResponseEntity deleteProduct(@PathVariable("productId")int id){
+        try{
+            return new ResponseEntity(productItemService.deleteProduct(id),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/update/{productId}")
+    public ResponseEntity updateProduct(@PathVariable("productId")int id,@RequestBody ProductRequest productRequest){
+        try{
+            return new ResponseEntity(productItemService.updateProduct(id,productRequest),HttpStatus.ACCEPTED);
+        }catch (Exception e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
 }

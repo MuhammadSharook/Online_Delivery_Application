@@ -14,13 +14,7 @@ public class ListItemRequest {
 
     int vendorId;
 
-    String productName;
-
-    double price;
-
-    Category category;
-
-    SubCategory subCategory;
+    ProductRequest productRequest;
 
     boolean available;
 
