@@ -8,4 +8,6 @@ public interface CustomerService {
     public CustomerResponse addCustomer(CustomerRequest customerRequest);
 
     public CustomerResponse findCustomerByMobile(String mobileNo);
+
+    String deleteCustomer(String mobileNo);
 }

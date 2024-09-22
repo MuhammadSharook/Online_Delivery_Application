@@ -11,4 +11,6 @@ public interface DeliveryPartnerService {
     String updateMobileNo(String oldMobileNo, String newMobileNo);
 
     DeliveryPartnerResponse seeAllOrders(String mobileNo);
+
+    String deleteDeliveryPartner(String mobileNo);
 }

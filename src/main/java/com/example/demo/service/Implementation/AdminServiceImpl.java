@@ -38,4 +38,17 @@ public class AdminServiceImpl implements AdminService {
         }
         return AdminTransformer.fromAdminToAdminResponse(admin);
     }
+
+    @Override
+    public String deleteAdmin(String mobileNo) {
+        Admin admin = adminRepository.findByMobileNo(mobileNo);
+
+        if(admin == null){
+            throw new AdminNotFoundException("Admin not found!!!");
+        }
+
+        adminRepository.delete(admin);
+
+        return "Successfully deleted.";
+    }
 }

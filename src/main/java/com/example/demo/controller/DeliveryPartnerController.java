@@ -56,4 +56,14 @@ public class DeliveryPartnerController {
             return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/delete/{mobileNo}")
+    public ResponseEntity deleteDeliveryPartner(@PathVariable("mobileNo")String mobileNo){
+        try{
+            String response = deliveryPartnerService.deleteDeliveryPartner(mobileNo);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
 }

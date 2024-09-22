@@ -36,4 +36,14 @@ public class AdminController {
             return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/delete/{mobileNo}")
+    public ResponseEntity deleteAdmin(@PathVariable("mobileNo") String mobileNo){
+        try{
+            String response = adminService.deleteAdmin(mobileNo);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
 }

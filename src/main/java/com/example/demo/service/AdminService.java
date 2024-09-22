@@ -7,4 +7,6 @@ public interface AdminService {
     AdminResponse addAdmin(AdminRequest adminRequest);
 
     AdminResponse findAdminByMobileNo(String mobileNo);
+
+    String deleteAdmin(String mobileNo);
 }

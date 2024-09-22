@@ -77,5 +77,17 @@ public class DeliveryPartnerServiceImpl implements com.example.demo.service.Deli
         return DeliveryPartnerTransformer.fromDeliverPartnerToDeliveryPartnerResponse(deliveryPartner);
     }
 
+    @Override
+    public String deleteDeliveryPartner(String mobileNo) {
+        DeliveryPartner deliveryPartner = deliveryPartnerRepository.findByMobileNo(mobileNo);
+
+        if(deliveryPartner == null){
+            throw new DeliveryPartnerNotFoundException("DeliveryPartner not found!!!");
+        }
+
+        deliveryPartnerRepository.delete(deliveryPartner);
+        return "Successfully deleted DeleveryPartner.";
+    }
+
 
 }

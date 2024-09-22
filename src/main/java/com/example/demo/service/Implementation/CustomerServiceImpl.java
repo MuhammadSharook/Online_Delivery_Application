@@ -5,6 +5,7 @@ import com.example.demo.dto.response.CustomerResponse;
 import com.example.demo.exception.CustomerNotFoundException;
 import com.example.demo.model.Cart;
 import com.example.demo.model.Customer;
+import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.service.CustomerService;
 import com.example.demo.transformer.CustomerTransformer;
@@ -18,10 +19,13 @@ public class CustomerServiceImpl implements CustomerService {
     
 
     private final CustomerRepository customerRepository;
+    private final CartRepository cartRepository;
 
     @Autowired
-    public CustomerServiceImpl(CustomerRepository customerRepository) {
+    public CustomerServiceImpl(CustomerRepository customerRepository,
+                               CartRepository cartRepository) {
         this.customerRepository = customerRepository;
+        this.cartRepository = cartRepository;
     }
 
 
@@ -55,5 +59,23 @@ public class CustomerServiceImpl implements CustomerService {
             throw new CustomerNotFoundException("Invalid mobile No !!!");
         }
         return CustomerTransformer.CustomerToCustomerResponse(customer);
+    }
+
+    @Override
+    public String deleteCustomer(String mobileNo) {
+
+        Customer customer = customerRepository.findByMobileNo(mobileNo);
+
+        if(customer == null){
+            throw new CustomerNotFoundException("Customer not found!!!");
+        }
+
+        Cart cart = customer.getCart();
+        cartRepository.delete(cart);
+
+        customerRepository.delete(customer);
+
+        return "Successfully deleted!!!";
+
     }
 }

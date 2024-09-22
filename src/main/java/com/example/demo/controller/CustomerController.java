@@ -38,4 +38,15 @@ public class CustomerController {
             return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/delete/{mobileNo}")
+    public ResponseEntity deleteCustomer(@PathVariable("mobileNo") String mobileNo){
+        try{
+            String response = customerService.deleteCustomer(mobileNo);
+            return new ResponseEntity(response,HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
 }
