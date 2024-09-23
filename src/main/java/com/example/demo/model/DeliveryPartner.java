@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,11 @@ public class DeliveryPartner {
 
     @Column(unique = true,nullable = false)
     @Size(min = 10,max = 10)
-    String mobileNO;
+    String mobileNo;
+
+    @Email
+    @Column(unique = true)
+    String Email;
 
     @Enumerated(EnumType.STRING)
     Gender gender;

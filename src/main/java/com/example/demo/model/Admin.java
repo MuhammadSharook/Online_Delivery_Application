@@ -51,8 +51,8 @@ public class Admin  {
     @Enumerated(EnumType.STRING)
     Role role;
 
-    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
-    List<Customer> user = new ArrayList<>();
+//    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
+//    List<Customer> user = new ArrayList<>();
 
     @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
     List<ProductItem> productItems = new ArrayList<>();

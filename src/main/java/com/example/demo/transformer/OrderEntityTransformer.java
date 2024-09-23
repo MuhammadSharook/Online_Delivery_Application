@@ -39,7 +39,7 @@ public static OrderEntity prepareOrderEntity(Cart cart){
                 .customerName(savedOrder.getCustomer().getName())
                 .customerMobileNo(savedOrder.getCustomer().getMobileNo())
                 .deliveryPartnerName(savedOrder.getDeliveryPartner().getName())
-                .deliveryPartnerMobileNo(savedOrder.getDeliveryPartner().getMobileNO())
+                .deliveryPartnerMobileNo(savedOrder.getDeliveryPartner().getMobileNo())
                 .vendorName(savedOrder.getVendor().getName())
                 .productItemResponseList(productItemResponseList)
                 .build();

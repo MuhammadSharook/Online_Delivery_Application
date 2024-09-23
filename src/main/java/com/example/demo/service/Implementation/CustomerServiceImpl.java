@@ -9,7 +9,10 @@ import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.service.CustomerService;
 import com.example.demo.transformer.CustomerTransformer;
+import com.example.demo.utils.MailComposer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,6 +32,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
 
+    @Autowired
+    JavaMailSender javaMailSender;
+
     public CustomerResponse addCustomer(CustomerRequest customerRequest) {
 
         //dto to customer model
@@ -41,13 +47,14 @@ public class CustomerServiceImpl implements CustomerService {
                 .build();
 
         customer.setCart(cart);
-        customer.setCommentList(new ArrayList<>());
         customer.setGender(customerRequest.getGender());
         customer.setPassword(customerRequest.getPassword());
         customer.setRole(customer.getRole());
 
         Customer savedCustomer = customerRepository.save(customer);
 
+        SimpleMailMessage message = MailComposer.composeCustomerRegistrationMail(savedCustomer);
+        javaMailSender.send(message);
         return CustomerTransformer.CustomerToCustomerResponse(savedCustomer);
     }
 

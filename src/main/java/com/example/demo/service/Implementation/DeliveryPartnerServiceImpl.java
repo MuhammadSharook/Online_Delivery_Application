@@ -7,6 +7,7 @@ import com.example.demo.exception.DeliveryPartnerNotFoundException;
 import com.example.demo.exception.VendorNotFoundException;
 import com.example.demo.model.DeliveryPartner;
 import com.example.demo.repository.DeliveryPartnerRepository;
+import com.example.demo.service.DeliveryPartnerService;
 import com.example.demo.transformer.DeliveryPartnerTransformer;
 import org.apache.el.stream.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class DeliveryPartnerServiceImpl implements com.example.demo.service.DeliveryPartnerService {
+public class DeliveryPartnerServiceImpl implements DeliveryPartnerService {
 
     private final DeliveryPartnerRepository deliveryPartnerRepository;
 
@@ -62,7 +63,7 @@ public class DeliveryPartnerServiceImpl implements com.example.demo.service.Deli
         if(deliveryPartner == null){
             throw new DeliveryPartnerNotFoundException("Delivery Partner does not exists.");
         }
-        deliveryPartner.setMobileNO(newMobileNo);
+        deliveryPartner.setMobileNo(newMobileNo);
         deliveryPartnerRepository.save(deliveryPartner);
         return "Your Mobile No has been changed from [ " + oldMobileNo +"] to [" + newMobileNo + "]";
     }

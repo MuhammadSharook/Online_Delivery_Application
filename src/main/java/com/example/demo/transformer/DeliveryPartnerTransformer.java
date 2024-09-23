@@ -15,7 +15,7 @@ public class DeliveryPartnerTransformer {
     public static DeliveryPartner fromDeliveryPartnerRequesttoDeliveryPartner(DeliveryPartnerRequest deliveryPartnerRequest){
         return DeliveryPartner.builder()
                 .name(deliveryPartnerRequest.getName())
-                .mobileNO(deliveryPartnerRequest.getMobileNo())
+                .mobileNo(deliveryPartnerRequest.getMobileNo())
                 .gender(deliveryPartnerRequest.getGender())
                 .role(deliveryPartnerRequest.getRole())
                 .orders(new ArrayList<>())
@@ -31,7 +31,7 @@ public class DeliveryPartnerTransformer {
         }
         return DeliveryPartnerResponse.builder()
                 .name(deliveryPartner.getName())
-                .mobileNo(deliveryPartner.getMobileNO())
+                .mobileNo(deliveryPartner.getMobileNo())
                 .orders(orderEntityResponse)
                 .build();
     }

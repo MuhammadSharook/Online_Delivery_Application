@@ -42,8 +42,6 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     Role role;
 
-    int noOfOrders = 0;
-
     @Column(unique = true)
     @Size(min = 10, max = 10)
     String mobileNo;
@@ -57,8 +55,6 @@ public class Customer {
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     List<OrderEntity> orders = new ArrayList<>();
 
-    @ManyToOne
-    Admin admin;
 
     @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
     List<Comment> commentList = new ArrayList<>();

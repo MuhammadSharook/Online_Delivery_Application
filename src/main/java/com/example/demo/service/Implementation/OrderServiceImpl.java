@@ -1,6 +1,5 @@
 package com.example.demo.service.Implementation;
 
-import com.example.demo.Enum.Coupon;
 import com.example.demo.Enum.OrderStatus;
 import com.example.demo.dto.response.OrderEntityResponse;
 import com.example.demo.exception.CustomerNotFoundException;
@@ -23,18 +22,14 @@ public class OrderServiceImpl implements OrderService {
     private final DeliveryPartnerRepository deliveryPartnerRepository;
     private final VendorRepository vendorRepository;
 
-    private final BillRepository billRepository;
-
     public OrderServiceImpl(CustomerRepository customerRepository,
                             OrderEntityRepository orderEntityRepository,
                             DeliveryPartnerRepository deliveryPartnerRepository,
-                            VendorRepository vendorRepository,
-                            BillRepository billRepository) {
+                            VendorRepository vendorRepository) {
         this.customerRepository = customerRepository;
         this.orderEntityRepository = orderEntityRepository;
         this.deliveryPartnerRepository = deliveryPartnerRepository;
         this.vendorRepository = vendorRepository;
-        this.billRepository = billRepository;
     }
 
     @Override
@@ -52,16 +47,13 @@ public class OrderServiceImpl implements OrderService {
         }
 
 
-        customer.setNoOfOrders(customer.getNoOfOrders() + 1);
         DeliveryPartner deliveryPartner = deliveryPartnerRepository.findRandomDeliveryPartner();
         Vendor vendor = cart.getProductItems().get(0).getListItem().getVendor();
 
 
-        Bill bill1 = new Bill();
-        Bill bill = billRepository.save(bill1);
-
         OrderEntity order = OrderEntityTransformer.prepareOrderEntity(cart);
 
+        OrderEntity savedOrder = orderEntityRepository.save(order);
 
         order.setCustomer(customer);
         order.setDeliveryPartner(deliveryPartner);
@@ -69,13 +61,11 @@ public class OrderServiceImpl implements OrderService {
         order.setProductItems(cart.getProductItems());
         order.setOrderStatus(OrderStatus.ORDER_PLACED);
 
-        OrderEntity savedOrder = orderEntityRepository.save(order);
+
 
         customer.getOrders().add(savedOrder);
         deliveryPartner.getOrders().add(savedOrder);
         vendor.getOrders().add(savedOrder);
-        bill.setOrder(savedOrder);
-        savedOrder.setBill(bill);
 
 
         for(ProductItem productItem : cart.getProductItems()){
@@ -83,8 +73,6 @@ public class OrderServiceImpl implements OrderService {
             productItem.setOrder(savedOrder);
         }
 
-        double cartValue = cart.getCartTotal();
-        cart.setCartTotal(0);
 
         clearCart(cart);
 
@@ -92,41 +80,6 @@ public class OrderServiceImpl implements OrderService {
         deliveryPartnerRepository.save(deliveryPartner);
         vendorRepository.save(vendor);
 
-        bill.setOrdervalue(cartValue);
-        bill.setGst((double) (0.05 * cartValue));
-
-        Coupon coupon = null;
-        if(customer.getNoOfOrders() == 1)
-        {
-            coupon = Coupon.FIRST_ORDER;
-        } else if (bill.getOrdervalue() > 499 && bill.getOrdervalue() <= 799) {
-            coupon = Coupon.ORDER_ABOVE_499;
-        } else if (bill.getOrdervalue() > 799 && bill.getOrdervalue() <= 1999) {
-            coupon = Coupon.ORDER_ABOVE_799;
-        } else if (bill.getOrdervalue() > 1999) {
-            coupon = Coupon.ORDER_ABOVE_1999;
-        }
-        else {
-            coupon = Coupon.N0_COUPON_APPLIED;
-        }
-
-        bill.setCoupon(coupon);
-
-        double discount = 0;
-        double gstPlusOrderVal = (0.05 * cartValue) + cartValue;
-
-        if(bill.getCoupon().equals(Coupon.FIRST_ORDER)){
-            discount = ((double) 30 / 100) * gstPlusOrderVal;
-        } else if (bill.getCoupon().equals(Coupon.ORDER_ABOVE_499)) {
-            discount = ((double) 5 / 100) * gstPlusOrderVal;
-        } else if (bill.getCoupon().equals(Coupon.ORDER_ABOVE_799)) {
-            discount = ((double) 7 / 100) * gstPlusOrderVal;
-        } else if (bill.getCoupon().equals(Coupon.ORDER_ABOVE_1999)) {
-            discount = ((double) 10 / 100) * gstPlusOrderVal;
-        }
-
-        bill.setDiscount(discount);
-        bill.setBillAmount(gstPlusOrderVal - discount);
 
         return OrderEntityTransformer.fromOrderEntityToOrderEntityResponse(savedOrder);
 

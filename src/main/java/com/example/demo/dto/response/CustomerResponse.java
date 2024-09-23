@@ -26,6 +26,5 @@ public class CustomerResponse {
 
     Gender gender;
 
-    CommentResponse comment;
 
 }

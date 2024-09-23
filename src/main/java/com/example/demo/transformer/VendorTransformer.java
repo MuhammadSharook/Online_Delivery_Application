@@ -1,8 +1,10 @@
 package com.example.demo.transformer;
 
 import com.example.demo.dto.request.VendorRequest;
+import com.example.demo.dto.response.ListItemResponse;
 import com.example.demo.dto.response.ProductItemResponse;
 import com.example.demo.dto.response.VendorResponse;
+import com.example.demo.model.ListItem;
 import com.example.demo.model.ProductItem;
 import com.example.demo.model.Vendor;
 
@@ -16,22 +18,22 @@ public class VendorTransformer {
         return Vendor.builder()
                 .name(vendorRequest.getName())
                 .location(vendorRequest.getLocation())
-                .ContactNumber(vendorRequest.getContactNo())
+                .mobileNo(vendorRequest.getContactNo())
                 .category(vendorRequest.getCategory())
                 .build();
     }
 
     public static VendorResponse VendorToVendorResponse(Vendor vendor)
     {
-        List<ProductItemResponse> productItemResponseList = new ArrayList<>();
-        for(ProductItem productItem : vendor.getProductItemList())
+        List<ListItemResponse> listItemResponseArrayList = new ArrayList<>();
+        for(ListItem listItem : vendor.getAvailableListItems())
         {
-            productItemResponseList.add(ProductItemTransformer.fromProductItemToProductItemResponse(productItem));
+            listItemResponseArrayList.add(ListItemTransformer.listItemToListItemResponse(listItem));
         }
         return VendorResponse.builder()
                 .name(vendor.getName())
                 .location(vendor.getLocation())
-                .productItemResponseList(productItemResponseList)
+                .listItemResponseList(listItemResponseArrayList)
                 .build();
     }
 }

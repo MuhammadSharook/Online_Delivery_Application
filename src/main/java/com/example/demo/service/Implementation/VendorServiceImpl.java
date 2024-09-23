@@ -42,8 +42,8 @@ public class VendorServiceImpl implements VendorService {
     }
 
     @Override
-    public VendorResponse getVendorByMobile(String mobileNo) {
-        Vendor vendor = vendorRepository.getVendorByMobile(mobileNo);
+    public VendorResponse getVendorByMobileNo(String mobileNo) {
+        Vendor vendor = vendorRepository.getVendorByMobileNo(mobileNo);
         if(vendor == null)
         {
             throw new VendorNotFoundException("Invalid Mobile No !!!");

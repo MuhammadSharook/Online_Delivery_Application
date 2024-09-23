@@ -46,8 +46,6 @@ public class OrderEntity {
     @JoinColumn
     Vendor vendor;
 
-    @OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
-    Bill bill;
 
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     List<ProductItem> productItems = new ArrayList<>();

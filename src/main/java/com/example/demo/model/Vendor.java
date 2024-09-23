@@ -40,7 +40,7 @@ public class Vendor {
 
     @Column(unique = true,nullable = false)
     @Size(min = 10,max = 10)
-    String ContactNumber;
+    String mobileNo;
 
     @Enumerated(EnumType.STRING)
     Role role;

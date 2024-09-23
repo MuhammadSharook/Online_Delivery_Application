@@ -8,7 +8,7 @@ public interface VendorService {
 
     public  VendorResponse addVendor(VendorRequest vendorRequest);
 
-   public VendorResponse getVendorByMobile(String mobileNo);
+   public VendorResponse getVendorByMobileNo(String mobileNo);
 
     VendorResponse addListItemToVendor(ListItemRequest listItemRequest);
 }

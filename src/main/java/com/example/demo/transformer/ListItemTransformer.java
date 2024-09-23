@@ -8,10 +8,10 @@ public class ListItemTransformer {
 
     public static ListItem ListItemRequestToListItem(ListItemRequest listItemRequest){
         return ListItem.builder()
-                .prodectName(listItemRequest.getProductName())
-                .price(listItemRequest.getPrice())
-                .category(listItemRequest.getCategory())
-                .subCategory(listItemRequest.getSubCategory())
+                .prodectName(listItemRequest.getProductRequest().getProductName())
+                .price(listItemRequest.getProductRequest().getPrice())
+                .category(listItemRequest.getProductRequest().getCategory())
+                .subCategory(listItemRequest.getProductRequest().getSubCategory())
                 .available(listItemRequest.isAvailable())
                 .build();
     }

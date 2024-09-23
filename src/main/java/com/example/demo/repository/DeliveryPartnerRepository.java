@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DeliveryPartnerRepository extends JpaRepository<DeliveryPartner,Integer> {
-    DeliveryPartner findByMobileNo(String mobileNo);
+    public  DeliveryPartner findByMobileNo(String mobileNo);
 
     String findRandomDeliveryPartner = "select * from delivery_partner Order By RANDOM() LIMIT 1";
     @Query(value = findRandomDeliveryPartner,nativeQuery = true)

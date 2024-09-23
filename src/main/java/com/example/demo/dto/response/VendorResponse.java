@@ -16,5 +16,5 @@ public class VendorResponse {
 
     String location;
 
-    List<ProductItemResponse> productItemResponseList;
+    List<ListItemResponse> listItemResponseList;
 }

@@ -31,7 +31,7 @@ public class VendorController {
     @GetMapping("/find/mobile{mobile}")
     public ResponseEntity getVendorByMobile(@PathVariable("mobile") String mobileNo){
         try{
-            VendorResponse vendorResponse = vendorService.getVendorByMobile(mobileNo);
+            VendorResponse vendorResponse = vendorService.getVendorByMobileNo(mobileNo);
             return new ResponseEntity(vendorResponse, HttpStatus.FOUND);
         }
         catch (Exception e)
