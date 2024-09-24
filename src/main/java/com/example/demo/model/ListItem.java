@@ -41,8 +41,8 @@ public class ListItem {
     @OneToMany(mappedBy = "listItem",cascade = CascadeType.ALL)
     List<ProductItem> productItems = new ArrayList<>();
 
-    @ManyToOne
-    Admin admin;
+//    @ManyToOne
+//    Admin admin;
 
 
 }

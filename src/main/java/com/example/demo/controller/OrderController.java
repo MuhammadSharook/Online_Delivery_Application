@@ -23,7 +23,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/place/mobile{mobile}")
+    @PostMapping("/place-order/{mobile}")
     public ResponseEntity placeOrder(@PathVariable("mobile") String mobileNo){
         try{
             OrderEntityResponse orderEntityResponse = orderService.placeOrder(mobileNo);
@@ -51,5 +51,10 @@ public class OrderController {
         }catch (Exception e){
             return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/orders")
+    public String ordersPage(){
+        return "orders";
     }
 }

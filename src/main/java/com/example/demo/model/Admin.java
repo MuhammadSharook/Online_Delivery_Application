@@ -54,16 +54,16 @@ public class Admin  {
 //    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
 //    List<Customer> user = new ArrayList<>();
 
-    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
-    List<ProductItem> productItems = new ArrayList<>();
-
-    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
-    List<ListItem> listItems = new ArrayList<>();
-
-    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
-    List<DeliveryPartner> deliveryPartners = new ArrayList<>();
-
-    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
-    List<OrderEntity> orders = new ArrayList<>();
+//    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
+//    List<ProductItem> productItems = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
+//    List<ListItem> listItems = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
+//    List<DeliveryPartner> deliveryPartners = new ArrayList<>();
+//
+//    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
+//    List<OrderEntity> orders = new ArrayList<>();
 
 }

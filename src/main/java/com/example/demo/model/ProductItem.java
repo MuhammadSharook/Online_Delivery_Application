@@ -44,8 +44,8 @@ public class ProductItem {
     @JoinColumn
     OrderEntity order;
 
-    @ManyToOne
-    Admin admin;
+//    @ManyToOne
+//    Admin admin;
 
     @ManyToOne
     @JoinColumn

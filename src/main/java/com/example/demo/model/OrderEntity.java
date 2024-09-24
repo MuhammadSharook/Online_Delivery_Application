@@ -31,8 +31,9 @@ public class OrderEntity {
     OrderStatus orderStatus;
 
     @CreationTimestamp
-
     Date orderTime;
+
+    String razorpayOrderId;
 
     @ManyToOne
     @JoinColumn
@@ -50,6 +51,6 @@ public class OrderEntity {
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     List<ProductItem> productItems = new ArrayList<>();
 
-    @ManyToOne
-    Admin admin;
+//    @ManyToOne
+//    Admin admin;
 }

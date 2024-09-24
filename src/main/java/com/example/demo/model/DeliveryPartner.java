@@ -46,6 +46,6 @@ public class DeliveryPartner {
     @OneToMany(mappedBy = "deliveryPartner",cascade = CascadeType.ALL)
     List<OrderEntity> orders = new ArrayList<>();
 
-    @ManyToOne
-    Admin admin;
+//    @ManyToOne
+//    Admin admin;
 }

@@ -1,6 +1,8 @@
 package com.example.demo.service.Implementation;
 
 import com.example.demo.Enum.OrderStatus;
+import com.example.demo.controller.PaypalController;
+import com.example.demo.dto.request.PaymentOrder;
 import com.example.demo.dto.response.OrderEntityResponse;
 import com.example.demo.exception.CustomerNotFoundException;
 import com.example.demo.exception.EmptyCartException;
@@ -22,14 +24,17 @@ public class OrderServiceImpl implements OrderService {
     private final DeliveryPartnerRepository deliveryPartnerRepository;
     private final VendorRepository vendorRepository;
 
+    private final PaypalController paypalController;
+
     public OrderServiceImpl(CustomerRepository customerRepository,
                             OrderEntityRepository orderEntityRepository,
                             DeliveryPartnerRepository deliveryPartnerRepository,
-                            VendorRepository vendorRepository) {
+                            VendorRepository vendorRepository, PaypalServiceImpl paypalService, PaypalController paypalController) {
         this.customerRepository = customerRepository;
         this.orderEntityRepository = orderEntityRepository;
         this.deliveryPartnerRepository = deliveryPartnerRepository;
         this.vendorRepository = vendorRepository;
+        this.paypalController = paypalController;
     }
 
     @Override
@@ -51,7 +56,9 @@ public class OrderServiceImpl implements OrderService {
         Vendor vendor = cart.getProductItems().get(0).getListItem().getVendor();
 
 
+
         OrderEntity order = OrderEntityTransformer.prepareOrderEntity(cart);
+
 
         OrderEntity savedOrder = orderEntityRepository.save(order);
 

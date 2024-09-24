@@ -15,8 +15,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
 @Service
 public class CustomerServiceImpl implements CustomerService {
     
@@ -55,6 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         SimpleMailMessage message = MailComposer.composeCustomerRegistrationMail(savedCustomer);
         javaMailSender.send(message);
+
         return CustomerTransformer.CustomerToCustomerResponse(savedCustomer);
     }
 
