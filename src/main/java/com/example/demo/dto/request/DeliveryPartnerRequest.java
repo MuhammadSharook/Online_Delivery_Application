@@ -18,5 +18,5 @@ public class DeliveryPartnerRequest {
 
     Gender gender;
 
-    Role role;
+    String role;
 }

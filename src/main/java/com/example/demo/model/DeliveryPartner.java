@@ -40,8 +40,7 @@ public class DeliveryPartner {
     @Enumerated(EnumType.STRING)
     Gender gender;
 
-    @Enumerated(EnumType.STRING)
-    Role role;
+    String role;
 
     @OneToMany(mappedBy = "deliveryPartner",cascade = CascadeType.ALL)
     List<OrderEntity> orders = new ArrayList<>();

@@ -8,6 +8,7 @@ import com.example.demo.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +23,7 @@ public class CartController {
     }
 
     @PostMapping("/add-product-to-cart/")
+    @PreAuthorize("hasAuthority('ADMIN','CUSTOMER')")
     public ResponseEntity addProductToCart(@RequestBody ProductItemRequest productItemRequest){
         try{
             CartStatusResponse cartStatusResponse = cartService.addProductToCart(productItemRequest);

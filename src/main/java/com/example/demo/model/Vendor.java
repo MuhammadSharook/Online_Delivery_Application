@@ -42,8 +42,7 @@ public class Vendor {
     @Size(min = 10,max = 10)
     String mobileNo;
 
-    @Enumerated(EnumType.STRING)
-    Role role;
+    String role;
 
     @OneToMany(mappedBy = "vendor",cascade = CascadeType.ALL)
     List<OrderEntity> orders = new ArrayList<>();

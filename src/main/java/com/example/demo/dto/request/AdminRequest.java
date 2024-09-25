@@ -19,7 +19,7 @@ public class AdminRequest {
 
     Gender gender;
 
-    Role role;
+    String role;
 
     String  mail;
 

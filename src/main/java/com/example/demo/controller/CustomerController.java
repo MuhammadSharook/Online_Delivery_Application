@@ -6,6 +6,7 @@ import com.example.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +22,7 @@ public class CustomerController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('ADMIN','CUSTOMER')")
     public ResponseEntity addCustomer(@RequestBody CustomerRequest customerRequest)
     {
         CustomerResponse customerResponse = customerService.addCustomer(customerRequest);
@@ -28,6 +30,7 @@ public class CustomerController {
     }
 
     @GetMapping("/find/mobile/{mobile}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity getCustomerByMobile(@PathVariable("mobile") String mobileNo){
         try{
             CustomerResponse customerResponse = customerService.findCustomerByMobile(mobileNo);
@@ -40,6 +43,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/delete/{mobileNo}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity deleteCustomer(@PathVariable("mobileNo") String mobileNo){
         try{
             String response = customerService.deleteCustomer(mobileNo);

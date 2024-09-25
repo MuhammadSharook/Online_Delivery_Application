@@ -6,6 +6,7 @@ import com.example.demo.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,12 +22,14 @@ public class AdminController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity addAdmin(@RequestBody AdminRequest adminRequest){
         AdminResponse adminResponse = adminService.addAdmin(adminRequest);
         return new ResponseEntity(adminResponse, HttpStatus.CREATED);
     }
 
     @GetMapping("/find/mobile{mobile}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public  ResponseEntity findAdminByMobileNo (@PathVariable("mobile") String mobileNo){
         try{
             AdminResponse adminResponse = adminService.findAdminByMobileNo(mobileNo);
@@ -38,6 +41,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/delete/{mobileNo}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity deleteAdmin(@PathVariable("mobileNo") String mobileNo){
         try{
             String response = adminService.deleteAdmin(mobileNo);

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,12 +24,14 @@ public class VendorController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('ADMIN','VENDOR')")
     public ResponseEntity addVendor (@RequestBody VendorRequest vendorRequest){
         VendorResponse vendorResponse = vendorService.addVendor(vendorRequest);
         return new ResponseEntity(vendorResponse, HttpStatus.CREATED);
     }
 
     @GetMapping("/find/mobile{mobile}")
+    @PreAuthorize("hasAuthority('ADMIN','VENDOR')")
     public ResponseEntity getVendorByMobile(@PathVariable("mobile") String mobileNo){
         try{
             VendorResponse vendorResponse = vendorService.getVendorByMobileNo(mobileNo);
@@ -41,6 +44,7 @@ public class VendorController {
     }
 
     @PostMapping("/add/list")
+    @PreAuthorize("hasAuthority('ADMIN','VENDOR')")
     public ResponseEntity addListItemToVendor(@RequestBody ListItemRequest listItemRequest){
         VendorResponse vendorResponse = vendorService.addListItemToVendor(listItemRequest);
         return new ResponseEntity(vendorResponse,HttpStatus.CREATED);

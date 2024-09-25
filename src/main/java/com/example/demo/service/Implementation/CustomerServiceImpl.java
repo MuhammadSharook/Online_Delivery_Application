@@ -13,6 +13,7 @@ import com.example.demo.utils.MailComposer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +22,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CartRepository cartRepository;
+
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public CustomerServiceImpl(CustomerRepository customerRepository,
@@ -46,7 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         customer.setCart(cart);
         customer.setGender(customerRequest.getGender());
-        customer.setPassword(customerRequest.getPassword());
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         customer.setRole(customer.getRole());
 
         Customer savedCustomer = customerRepository.save(customer);

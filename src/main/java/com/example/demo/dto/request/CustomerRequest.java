@@ -20,7 +20,7 @@ public class CustomerRequest {
 
     String password;
 
-    Role role;
+    String role;
 
     String mobileNo;
 

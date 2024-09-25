@@ -48,8 +48,8 @@ public class Admin  {
     @Enumerated(EnumType.STRING)
     Gender gender;
 
-    @Enumerated(EnumType.STRING)
-    Role role;
+
+    String role;
 
 //    @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
 //    List<Customer> user = new ArrayList<>();

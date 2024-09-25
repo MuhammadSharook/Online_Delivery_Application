@@ -22,5 +22,5 @@ public class VendorRequest {
 
 //    SubCategory subCategory;
 
-    Role role;
+    String role;
 }

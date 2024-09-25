@@ -8,6 +8,7 @@ import org.hibernate.query.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class OrderController {
     }
 
     @PostMapping("/place-order/{mobile}")
+    @PreAuthorize("hasAuthority('CUSTOMER')")
     public ResponseEntity placeOrder(@PathVariable("mobile") String mobileNo){
         try{
             OrderEntityResponse orderEntityResponse = orderService.placeOrder(mobileNo);
@@ -34,6 +36,7 @@ public class OrderController {
     }
 
     @GetMapping("/history/{customerId}")
+    @PreAuthorize("hasAuthority('ADMIN','CUSTOMER')")
     public ResponseEntity getOrderHistory(@PathVariable("customerId")int customerId){
        try {
            List<OrderEntity> orders = orderService.getOrderHistory(customerId);
@@ -44,6 +47,7 @@ public class OrderController {
     }
 
     @PutMapping("/status{orderId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity updateOrderStatus(@PathVariable("orderId")int orderId, @RequestBody OrderStatus status){
         try {
             OrderEntityResponse order = orderService.updateOrderStatus(orderId, status);

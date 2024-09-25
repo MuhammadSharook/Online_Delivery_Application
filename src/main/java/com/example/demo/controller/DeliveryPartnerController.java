@@ -7,6 +7,7 @@ import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +22,7 @@ public class DeliveryPartnerController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('ADMIN','DELIVERY-PARTNER')")
     public ResponseEntity addDeliveryPartner(@RequestBody DeliveryPartnerRequest deliveryPartnerRequest){
 
         DeliveryPartnerResponse deliveryPartnerResponse = deliveryPartnerService.addDeliveryPartner(deliveryPartnerRequest);
@@ -28,6 +30,7 @@ public class DeliveryPartnerController {
     }
 
     @GetMapping("/find/mobile/{mobile}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity findDeliveryPartnerByMobileNo(@PathVariable("mobile") String mobileNo){
         try{
             DeliveryPartnerResponse deliveryPartnerResponse = deliveryPartnerService.findDeliveryPartnerByMobileNo(mobileNo);
@@ -39,6 +42,7 @@ public class DeliveryPartnerController {
     }
 
     @PutMapping("/update/old-mobileNo/{oldMObileNo}/new-mobileNo{newMobileNo}")
+    @PreAuthorize("hasAuthority('ADMIN','DELIVERY-PARTNER')")
     public ResponseEntity updateMobileNo(@PathVariable("oldMobileNo")String oldMobileNo,@PathVariable("newMobileNo") String newMobileNo){
         try{
             String response = deliveryPartnerService.updateMobileNo(oldMobileNo,newMobileNo);
@@ -48,6 +52,7 @@ public class DeliveryPartnerController {
         }
     }
     @GetMapping("/see-orders/mobileNo{mobileNo}")
+    @PreAuthorize("hasAuthority('ADMIN','DELIVERY-PARTNER')")
     public ResponseEntity seeAllOrders(@PathVariable("mobileNo")String mobileNo){
         try{
             DeliveryPartnerResponse deliveryPartnerResponse = deliveryPartnerService.seeAllOrders(mobileNo);
@@ -58,6 +63,7 @@ public class DeliveryPartnerController {
     }
 
     @DeleteMapping("/delete/{mobileNo}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity deleteDeliveryPartner(@PathVariable("mobileNo")String mobileNo){
         try{
             String response = deliveryPartnerService.deleteDeliveryPartner(mobileNo);

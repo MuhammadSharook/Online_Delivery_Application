@@ -9,6 +9,7 @@ import com.example.demo.model.Comment;
 import com.example.demo.service.ProductItemService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class ProductItemController {
     }
 
     @GetMapping("/get-product-from-particular-category")
+    @PreAuthorize("hasAuthority('ADMIN','VENDOR')")
     public ResponseEntity getProductFromCategory (@RequestParam("category")Category category){
         try{
             List<ProductItemResponsewithVendorName> response = productItemService.getProductFromCategory(category);
@@ -35,6 +37,7 @@ public class ProductItemController {
     }
 
     @PostMapping("/{productId}/comments")
+    @PreAuthorize("hasAuthority('CUSTOMER')")
     public ResponseEntity addCommentToProduct(@PathVariable int productId, @RequestBody Comment comment){
         productItemService.addCommentToProduct(productId,comment);
         return new ResponseEntity("Comment is added.",HttpStatus.CREATED);
@@ -42,6 +45,7 @@ public class ProductItemController {
 
 
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('ADMIN','VENDOR')")
     public ResponseEntity addProductItem(@RequestBody ListItemRequest listItemRequest){
         try {
             ProductItemResponse response = productItemService.addProductItem(listItemRequest);
@@ -53,6 +57,7 @@ public class ProductItemController {
     }
 
     @DeleteMapping("/delete/{productId}")
+    @PreAuthorize("hasAuthority('ADMIN','VENDOR')")
     public ResponseEntity deleteProduct(@PathVariable("productId")int id){
         try{
             return new ResponseEntity(productItemService.deleteProduct(id),HttpStatus.OK);
@@ -62,6 +67,7 @@ public class ProductItemController {
     }
 
     @PutMapping("/update/{productId}")
+    @PreAuthorize("hasAuthority('ADMIN','VENDOR')")
     public ResponseEntity updateProduct(@PathVariable("productId")int id,@RequestBody ProductRequest productRequest){
         try{
             return new ResponseEntity(productItemService.updateProduct(id,productRequest),HttpStatus.ACCEPTED);
