@@ -39,7 +39,6 @@ public class AdminController {
             return new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
-
     @DeleteMapping("/delete/{mobileNo}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity deleteAdmin(@PathVariable("mobileNo") String mobileNo){
