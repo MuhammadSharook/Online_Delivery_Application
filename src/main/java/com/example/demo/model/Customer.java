@@ -39,7 +39,8 @@ public class Customer {
     String password;
 
 
-    String role;
+    @Enumerated(value = EnumType.STRING)
+    Role role;
 
     @Column(unique = true)
     @Size(min = 10, max = 10)

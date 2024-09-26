@@ -22,7 +22,7 @@ public class CustomerResponse {
 
     String password;
 
-    String role;
+    Role role;
 
     Gender gender;
 

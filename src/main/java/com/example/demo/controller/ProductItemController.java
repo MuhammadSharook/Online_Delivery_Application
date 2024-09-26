@@ -36,6 +36,19 @@ public class ProductItemController {
         }
     }
 
+    @GetMapping("/get-product-from-particular-price")
+    @PreAuthorize("hasAuthority('ADMIN','VENDOR','CUSTOMER')")
+    public ResponseEntity getProductFromPrice(@RequestParam("price")int price)
+    {
+        try{
+            List<ProductItemResponsewithVendorName> response = productItemService.getProductFromPrice(price);
+            return new ResponseEntity(response,HttpStatus.FOUND);
+        }catch (Exception e)
+        {
+            return new ResponseEntity(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping("/{productId}/comments")
     @PreAuthorize("hasAuthority('CUSTOMER')")
     public ResponseEntity addCommentToProduct(@PathVariable int productId, @RequestBody Comment comment){

@@ -54,6 +54,21 @@ public class ProductItemServiceImpl implements ProductItemService {
     }
 
     @Override
+    public List<ProductItemResponsewithVendorName> getProductFromPrice(int price) {
+        List<ProductItem> productItemList = producttItemRepository.findByPrice(price);
+        if(productItemList.isEmpty()){
+            throw new ProductItemNotFoundException("No " + price + "product found.");
+        }
+        List<ProductItemResponsewithVendorName> response = new ArrayList<>();
+        for(ProductItem productItem : productItemList){
+            ProductItemResponsewithVendorName responsewithVendorName = ProductItemTransformer.fromProductItemToProductItemResponsewithVendorName(productItem);
+            response.add(responsewithVendorName);
+        }
+        return response;
+    }
+
+
+    @Override
     public void addCommentToProduct(int productId, Comment comment) {
         Optional<ProductItem> productItemOptional = producttItemRepository.findById(productId);
         if(productItemOptional.isEmpty()){

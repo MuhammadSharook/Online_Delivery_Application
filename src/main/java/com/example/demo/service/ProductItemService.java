@@ -20,4 +20,6 @@ public interface ProductItemService {
     String deleteProduct(int id);
 
     ResponseEntity updateProduct(int id,ProductRequest productRequest);
+
+    List<ProductItemResponsewithVendorName> getProductFromPrice(int price);
 }
