@@ -1,8 +1,9 @@
 package com.example.demo.controller;
 
+import ch.qos.logback.core.model.Model;
 import com.example.demo.dto.request.AdminRequest;
 import com.example.demo.dto.response.AdminResponse;
-import com.example.demo.service.AdminService;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +16,28 @@ public class AdminController {
 
 
     private final AdminService adminService;
+    private final CustomerService customerService;
+    private final DeliveryPartnerService deliveryPartnerService;
+    private final VendorService vendorService;
+    private final OrderService orderService;
 
     @Autowired
-    public AdminController(AdminService adminService) {
+    public AdminController(AdminService adminService,
+                           CustomerService customerService,
+                           DeliveryPartnerService deliveryPartnerService,
+                           VendorService vendorService,
+                           OrderService orderService) {
         this.adminService = adminService;
+        this.customerService = customerService;
+        this.deliveryPartnerService = deliveryPartnerService;
+        this.vendorService = vendorService;
+        this.orderService = orderService;
+    }
+
+
+    public String dashboard()
+    {
+        return "admin/dashboard";
     }
 
     @PostMapping("/add")

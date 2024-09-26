@@ -70,5 +70,10 @@ public class VendorServiceImpl implements VendorService {
 
     }
 
+    @Override
+    public Object getAllVendors() {
+        return vendorRepository.findAll();
+    }
+
 
 }

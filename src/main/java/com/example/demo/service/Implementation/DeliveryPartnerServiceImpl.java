@@ -90,5 +90,10 @@ public class DeliveryPartnerServiceImpl implements DeliveryPartnerService {
         return "Successfully deleted DeleveryPartner.";
     }
 
+    @Override
+    public Object getAllDeliverypartner() {
+        return deliveryPartnerRepository.findAll();
+    }
+
 
 }

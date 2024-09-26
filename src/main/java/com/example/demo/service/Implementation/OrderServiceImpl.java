@@ -93,6 +93,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Object getAllOrders() {
+        return orderEntityRepository.findAll();
+    }
+
+    @Override
     public List<OrderEntity> getOrderHistory(int customerId) {
         Customer customer = customerRepository.findById(customerId).get();
         if(customer == null)

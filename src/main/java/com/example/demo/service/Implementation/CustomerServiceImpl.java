@@ -15,6 +15,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -86,5 +87,10 @@ public class CustomerServiceImpl implements CustomerService {
 
         return "Successfully deleted!!!";
 
+    }
+
+    @Override
+    public Object getAllCustomers() {
+        return customerRepository.findAll();
     }
 }

@@ -10,4 +10,6 @@ public interface CustomerService {
     public CustomerResponse findCustomerByMobile(String mobileNo);
 
     String deleteCustomer(String mobileNo);
+
+     Object getAllCustomers();
 }

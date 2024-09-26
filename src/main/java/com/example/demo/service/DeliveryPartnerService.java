@@ -13,4 +13,6 @@ public interface DeliveryPartnerService {
     DeliveryPartnerResponse seeAllOrders(String mobileNo);
 
     String deleteDeliveryPartner(String mobileNo);
+
+    Object getAllDeliverypartner();
 }

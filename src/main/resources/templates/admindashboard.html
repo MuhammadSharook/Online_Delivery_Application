@@ -1,0 +1,73 @@
+<!-- src/main/resources/templates/admin/dashboard.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+<h1>Admin Dashboard</h1>
+<h2>Users</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Role</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.role}"></td>
+    </tr>
+</table>
+
+<h2>Products</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.stock}"></td>
+    </tr>
+</table>
+
+<h2>Orders</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>User ID</th>
+        <th>Product ID</th>
+        <th>Quantity</th>
+        <th>Order Date</th>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.id}"></td>
+        <td th:text="${order.userId}"></td>
+        <td th:text="${order.productId}"></td>
+        <td th:text="${order.quantity}"></td>
+        <td th:text="${order.orderDate}"></td>
+    </tr>
+</table>
+
+<h2>Deliveries</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Order ID</th>
+        <th>Status</th>
+        <th>Delivery Date</th>
+    </tr>
+    <tr th:each="delivery : ${deliveries}">
+        <td th:text="${delivery.id}"></td>
+        <td th:text="${delivery.orderId}"></td>
+        <td th:text="${delivery.status}"></td>
+        <td th:text="${delivery.deliveryDate}"></td>
+    </tr>
+</table>
+</body>
+</html>

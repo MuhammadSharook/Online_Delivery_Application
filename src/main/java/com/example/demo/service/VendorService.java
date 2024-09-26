@@ -11,4 +11,6 @@ public interface VendorService {
    public VendorResponse getVendorByMobileNo(String mobileNo);
 
     VendorResponse addListItemToVendor(ListItemRequest listItemRequest);
+
+    Object getAllVendors();
 }

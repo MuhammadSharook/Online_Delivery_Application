@@ -13,4 +13,6 @@ public interface OrderService {
     OrderEntityResponse updateOrderStatus(int orderId, OrderStatus status);
 
     OrderEntityResponse placeOrder(String mobileNo);
+
+    Object getAllOrders();
 }
